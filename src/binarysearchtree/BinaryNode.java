@@ -192,16 +192,16 @@ package binarysearchtree;
 
 // Basic node stored in unbalanced binary search trees.
 // Note that this class is not accessible outside this package
-public class BinaryNode {
+public class BinaryNode<AnyType> {
 	
 	// Date; accessible by other package routines
-	String element; // The data in the node
-	BinaryNode left; // Left child
-	BinaryNode right; // Right child
+	AnyType element; // The data in the node
+	BinaryNode<AnyType> left; // Left child
+	BinaryNode<AnyType> right; // Right child
 	
 	
 	// Constructor
-	BinaryNode(String theElement){
+	BinaryNode(AnyType theElement){
 		element = theElement;
 		left = right = null;
 	}
