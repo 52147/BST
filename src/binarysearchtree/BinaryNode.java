@@ -56,7 +56,7 @@ package binarysearchtree;
  *       - At 5, we would go right and encounter a null link and thus not find 6
  *       - Figure (b) shows that 6 can be inserted at the point at which the unsuccessful search terminated.
  *       
- *       
+ *       Insert of node 6
  *       (a) before      
  *         
  *             7

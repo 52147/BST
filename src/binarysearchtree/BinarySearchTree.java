@@ -289,8 +289,8 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
 			t.right = removeMin(t.right);
 		}
 		else
-			t = (t.left != null) ? t.left : t.right;
-		return t;
+			t = (t.left != null) ? t.left : t.right; // only one child
+		return t; // return the new node that at the deleted node
 		
 	}
 	
