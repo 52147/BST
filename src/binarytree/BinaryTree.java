@@ -79,14 +79,10 @@ package binarytree;
  *  
  *      - The third case must be disallowed because it would place all the nodes that are in tree t3
  *        in two places in t1. 
- *      - However, if t3 represents an empty tree, the third case should be allowed.
- *        
- *      
- *  
- *      
- *      
+ *      - However, if t3 represents an empty tree, the third case should be allowed.     
  *
  */
+
 // BinaryTree class; stores a binary tree.
 //
 // Construction: 
@@ -95,82 +91,87 @@ package binarytree;
 // Public Operation:
 // Various tree traversals, size, height, isEmpty, makeEmpty.
 // Also, the following tricky method:
-// void merge(Object root, BinaryTree t1, Binary t2)
+// void merge(Object root, BinaryTree t1, BinaryTree t2)
 // --> Construct a new tree
 // Errors:
 // Error message printed for illegal merges.
 
+/**
+ * 
+ * BinaryTree class that illustrates the calling of BinaryNode recursive
+ * routines and merge.
+ *
+ * @param <T>
+ */
 public class BinaryTree<T> {
-	
+
 	private BinaryNode<T> root;
-	
+
 	public BinaryTree() {
 		root = null;
 	}
-	
+
 	public BinaryTree(T rootItem) {
 		root = new BinaryNode<T>(rootItem, null, null);
 	}
-	
-	public BinaryNode<T> getRoot(){
+
+	public BinaryNode<T> getRoot() {
 		return root;
 	}
-	
+
 	public int size() {
 		return BinaryNode.size(root);
 	}
-	
+
 	public int height() {
 		return BinaryNode.height(root);
 	}
-	
+
 	public void printPreOrder() {
-		if(root != null)
+		if (root != null)
 			root.printPreOrder();
 	}
-	
+
 	public void printInOrder() {
-		if(root != null)
+		if (root != null)
 			root.printInOrder();
 	}
-	
+
 	public void printPostOrder() {
-		if(root != null)
+		if (root != null)
 			root.printPostOrder();
 	}
-	
+
 	public void makeEmpty() {
 		root = null;
 	}
-	
+
 	public boolean isEmpty() {
 		return root == null;
 	}
-	
+
 	/**
-	 * Merge routine for BinaryTree class.
-	 * Forms a new tree from rootItem, t1 and t2.
-	 * Does not allow t1 and t2 to be the same.
-	 * Correctly handles other aliasing conditions.
-	 * @param rootItem 
+	 * Merge routine for BinaryTree class. Forms a new tree from rootItem, t1 and
+	 * t2. Does not allow t1 and t2 to be the same. Correctly handles other aliasing
+	 * conditions.
+	 * 
+	 * @param rootItem
 	 * @param t1
 	 * @param t2
 	 */
 	public void merge(T rootItem, BinaryTree<T> t1, BinaryTree<T> t2) {
-		
-		if(t1.root == t2.root && t1.root != null)
-			throw new IllegalArgumentException();
-		
-		// Allocate new node
-		root = new BinaryNode<T> (rootItem, t1.root, t2.root);
-		
-		// Ensure that every node is in one tree
-		if(this != t1)
-			t1.root = null;
-		if(this != t2)
-			t2.root = null;
-	}
-	
-	
 
+		if (t1.root == t2.root && t1.root != null)
+			throw new IllegalArgumentException();
+
+		// Allocate new node
+		root = new BinaryNode<T>(rootItem, t1.root, t2.root);
+
+		// Ensure that every node is in one tree
+		if (this != t1)
+			t1.root = null;
+		if (this != t2)
+			t2.root = null;
+
+	}
 }

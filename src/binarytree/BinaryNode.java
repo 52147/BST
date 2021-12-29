@@ -138,7 +138,90 @@ package binarytree;
  *     - Thus the path length of the deepest node in the original tree is 1 more than its path length
  *       with respect to the root of its subtree.
  *     - If we compute this value for both subtrees, the maximum of these 2 values plus 1 is the answer we want.
+ *      
  *       
+ * = tree traversal =
+ * 
+ * - we have shown how recursion can be used to implement the binary tree methods.
+ * - When recursion is applied, we compute information about not only a node
+ *   but also all its descendants.
+ * - We say then that we are traversing the tree.
+ * - Two popular traversals are preorder and postorder traversals.
+ * 
+ * 
+ * preorder:(root - left - right)
+ * 
+ * - In a preorder traversal, the node processed and then its children are processed recursively.
+ * - The duplicate routine is an example of a preorder traversal
+ *   because the root is created first.
+ * - Then a left subtree is copied recursively, followed by copying the right subtree.
+ * 
+ * 
+ * postorder:(left - right - root)
+ * 
+ * - In a postorder traversal, the node is processed after both children are processed recursively.
+ * - Two examples are the methods size and height.
+ * - In both cases, information about a node(e.g., its size or height)
+ *   can be obtained only after the corresponding information is known for its children.
+ *   
+ * inorder:(left - root - right)
+ * 
+ * - A third common recursive traversal is the inorder traversal, 
+ *   in which the left child is recursively processed, the current node is processed,
+ *   and the right child is recursively processed.
+ * - This mechanism is used to generate an algebraic expression corresponding 
+ *   to an expression tree.
+ *   - for example,
+ *     the inorder traversal yields (a+((b-c)*d))
+ *     
+ *     (a) Preorder visitation routes
+ *           
+ *           1
+ *           /\
+ *          2  3
+ *             /\
+ *            4  6
+ *            \  /
+ *            5 7
+ *            
+ *       (b) postorder visitation routes
+ *            
+ *           7
+ *           /\
+ *          1  6
+ *             /\
+ *            3  5
+ *            \  /
+ *            2 4
+ *            
+ *       (c) inorder visitation routes
+ *       
+ *           2
+ *           /\
+ *          1  5
+ *             /\
+ *            3  7
+ *            \  /
+ *            4 6
+ *           
+ *     
+ *     
+ * - The code below illustrates routines that print the nodes in a binary tree
+ *   using each of the 3 recursive tree traversal algorithms.
+ *     
+ * Time complexity:
+ *     
+ * - The running time of each algorithm is linear.
+ * - In every case, each node is output only once.
+ * - Consequently, the total cost of an output statement over any traversal is O(N).    
+ *      
+ * - As a result, each if statement is also executed at most once per node,
+ *   for a total cost of O(N).      
+ * 
+ * - The total number of method calls made 
+ *   (which involves the constant work of internal run-time stack pushes and pops)
+ *   is likewise once per node, or O(N).
+ * - Thus the total running time is O(N).     
  *                         
  *
  */
@@ -148,14 +231,20 @@ package binarytree;
 // Construction: with no parameters, or an Object, left child, and right child.
 //
 // Public Operations:
-// int size()     -> Return size of subtree at node
-// int height()   -> Return height of a subtree at node
-// void printPostOrder()   -> Print a postorder tree tracersal
-// void orintInOrder()  -> Print an inorder tree traversal
-// void printPreOrder()  -> Print a preorder tree traversal
-// BinartNode duplicate()  -> Return a duplicate tree 
+// int size()              -> Return size of subtree at node
+// int height()            -> Return height of a subtree at node
+// void printPostOrder()   -> Print a postorder tree traversal
+// void printInOrder()     -> Print an inorder tree traversal
+// void printPreOrder()    -> Print a preorder tree traversal
+// BinaryNode duplicate()  -> Return a duplicate tree 
 
-public class BinaryNode<T> {
+/**
+ * Binary node class with recursive routines to compute size and height.
+ * 
+ *
+ * @param <T>
+ */
+final class BinaryNode<T> {
 	
 	private T element;
 	private BinaryNode<T> left;
@@ -202,6 +291,7 @@ public class BinaryNode<T> {
 	 * @param t
 	 * @return
 	 */
+	// post order: left -> right -> root
 	public static <T> int size(BinaryNode<T> t) {
 		if (t == null)
 			return 0;
@@ -215,6 +305,7 @@ public class BinaryNode<T> {
 	 * @param t
 	 * @return
 	 */
+	// post order: left -> right -> root
 	public static <T> int height(BinaryNode<T> t) {
 		
 		if (t == null)
@@ -223,6 +314,7 @@ public class BinaryNode<T> {
 			return 1 + Math.max(height(t.left), height(t.right));
 	}
 	
+	// preorder: root -> left -> right
 	public BinaryNode<T> duplicate(){
 		
 		BinaryNode<T> root = new BinaryNode<T> (element, null, null);
@@ -235,10 +327,30 @@ public class BinaryNode<T> {
 		return root; // Return resulting tree
 	}
 	
-	public void printPreOrder() {}
-	
-	public void printPostOrder() {}
-	
-	public void printInOrder() {}
+	// Print tree rooted at current node using preorder traversal.
+	public void printPreOrder() {
+		System.out.println(element); // Node
+		if(left != null)
+			left.printPreOrder();    // Left
+		if(right != null) 
+			right.printPreOrder();   // Right
+		
+	}
+	// Print tree rooted at current node using postorder traversal.
+	public void printPostOrder() {
+		if(left != null)     
+			left.printPostOrder();      // Left
+		if(right != null)
+			right.printPostOrder();     // Right
+		System.out.println(element);    // Node
+	}
+	// Print tree rooted at current node using inorder traversal.
+	public void printInOrder() {
+		if(left != null)
+			left.printInOrder();      // Left
+		System.out.println(element);  // Node
+		if(right != null)
+			right.printInOrder();     // Right
+	}
 
 }
