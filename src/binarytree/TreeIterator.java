@@ -65,7 +65,7 @@ import java.util.NoSuchElementException;
 // first and advance are abstract; others are final
 // boolean isValid()  -----> True if at valid position in tree
 // AnyType retrieve() -----> Return item in current position
-// void first()       ------> Set current position to first
+// void first()       -----> Set current position to first
 // void advance()     -----> Advance(prefix)
 // Errors:
 // Exceptions thrown for illegal access or advance    
