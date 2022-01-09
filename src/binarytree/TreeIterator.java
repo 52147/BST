@@ -70,42 +70,58 @@ import java.util.NoSuchElementException;
 // Errors:
 // Exceptions thrown for illegal access or advance    
 //
-abstract class TreeIterator<T> {	
-	
-	protected BinaryNode<T> t;  // the tree root
-	protected BinaryNode<T> current;  // the current position
-	
-	/**
-	 * Construct the iterator. The current position is set to null.
-	 * @param theTree the tree to which the iterator is bound.
-	 */
-	public TreeIterator(BinaryNode<T> theTree) {
-		t = theTree;
-		current = null;
-	}
-	
-	/**
-	 * Test if current position references a valid tree item.
-	 * @return true if the current position is not null; false otherwise.
-	 */
-	final public boolean isValid() {
-		return current != null;
-	}
-	
-	/**
-	 * Return the item stored in the current position.
-	 * @return the stored item.
-	 * @exception NoSuchElementException if the current position is invalid.
-	 */
-	final public T retrieve() {
-		if(current == null)
-			throw new NoSuchElementException();
-		return current.getElement();
-	}
-	
-	abstract public void first();
-	abstract public void advance();
-	
-	
+abstract class TreeIterator<AnyType>
+{
+    /**
+     * Construct the iterator.
+     * The current position is set to null.
+     * @param theTree the tree to which the iterator is
+     *     permanently bound.
+     */
+    public TreeIterator( BinaryTree<AnyType> theTree )
+    {
+        t = theTree;
+        current = null;
+    }
 
+    /**
+     * Set the current position to the first item, according
+     * to the traversal scheme.
+     */
+    abstract public void first( );
+
+    /**
+     * Test if current position references a valid tree item.
+     * @return true if the current position is not null; false otherwise.
+     */
+    final public boolean isValid( )
+    {
+        return current != null;
+    }
+
+    /**
+     * Return the item stored in the current position.
+     * @return the stored item.
+     * @throws NoSuchElementException if the current position is invalid.
+     */
+    final public AnyType retrieve( )
+    {
+        if( current == null )
+            throw new NoSuchElementException( "TreeIterator retrieve" );
+        return current.getElement( );
+    }
+    
+    /**
+     * Advance the current position to the next node in the tree,
+     *     according to the traversal scheme.
+     * If the current position is null, then throw an exception.
+     * This is the alternate strategy, that we did not use for lists.
+     * @throws NoSuchElementException if the current position is null.
+     */
+    abstract public void advance( );
+
+        /** The tree. */
+    protected BinaryTree<AnyType> t;        // Tree
+        /** Current position. */
+    protected BinaryNode<AnyType> current;  // Current position
 }

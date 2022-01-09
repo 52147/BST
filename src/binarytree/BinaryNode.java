@@ -242,46 +242,46 @@ package binarytree;
  * Binary node class with recursive routines to compute size and height.
  * 
  *
- * @param <T>
+ * @param <AnyType>
  */
-final class BinaryNode<T> {
+final class BinaryNode<AnyType> {
 	
-	private T element;
-	private BinaryNode<T> left;
-	private BinaryNode<T> right;
+	private AnyType element;
+	private BinaryNode<AnyType> left;
+	private BinaryNode<AnyType> right;
 	
 	
 	
 	public BinaryNode() {
 		this(null, null, null);
 	}
-	public BinaryNode(T theElement, BinaryNode<T> lt, BinaryNode<T> rt) {
+	public BinaryNode(AnyType theElement, BinaryNode<AnyType> lt, BinaryNode<AnyType> rt) {
 		element = theElement;
 		left = lt;
 		right = rt;
 	}
 	
-	public T getElement() {
+	public AnyType getElement() {
 		return element;
 	}
 	
-	public BinaryNode<T> getLeft(){
+	public BinaryNode<AnyType> getLeft(){
 		return left;
 	}
 	
-	public BinaryNode<T> getRight(){
+	public BinaryNode<AnyType> getRight(){
 		return right;
 	}
 	
-	public void setElement(T x) {
+	public void setElement(AnyType x) {
 		element = x;
 	}
 	
-	public void setLeft(BinaryNode<T> t) {
+	public void setLeft(BinaryNode<AnyType> t) {
 		left = t;
 	}
 	
-	public void setRight(BinaryNode<T> t) {
+	public void setRight(BinaryNode<AnyType> t) {
 		right = t;
 	}
 	/**
@@ -315,9 +315,9 @@ final class BinaryNode<T> {
 	}
 	
 	// preorder: root -> left -> right
-	public BinaryNode<T> duplicate(){
+	public BinaryNode<AnyType> duplicate(){
 		
-		BinaryNode<T> root = new BinaryNode<T> (element, null, null);
+		BinaryNode<AnyType> root = new BinaryNode<AnyType> (element, null, null);
 		// If there is a left subtree
 		if(left != null)
 			root.left = left.duplicate(); // Duplicate; attach
