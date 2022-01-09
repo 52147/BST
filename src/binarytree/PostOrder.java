@@ -46,6 +46,34 @@ package binarytree;
  *     
  * 
  */
+
+// PostOrder class; maintains "current position"
+// according to a postorder traversal
+// Construction: with tree to which iterator is bound
+//
+// Public Operations:
+// 1. boolean isValid()
+// 2. AnyType retrieve()
+// 3. void first()
+// 4. void advance()
+// Errors:
+// Exceptions thrown for illegal access or advance
+//
 public class PostOrder<AnyType> extends TreeIterator<AnyType> {
+	
+	protected Stack<StNode<AnyType>> s; // The stack StNode objects
+	
+	protected static class StNode<AnyType>{
+		
+		StNode(BinaryNode<AnyType> n ){
+			node = n;
+			timesPopped = 0;
+		}
+		BinaryNode<AnyType> node;
+		int timesPopped;
+		
+	}
+	
+	
 
 }
