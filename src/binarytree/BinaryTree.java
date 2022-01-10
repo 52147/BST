@@ -33,12 +33,14 @@ package binarytree;
  *  merge()
  *  - The merge routine, which uses 2 trees - t1 and t2 - and an element to create a new tree,
  *    with the element at the root and the 2 existing trees as left and right subtrees.
+ *    
  *  - In principle, it is a one-liner:
  *    
  *    root = new BinaryNode<T>(rootItem, t1.root, t2.root);
  *    
  *    - But, there are a host of complications.
  *    - Figure below shows the result of the simple one-line merge.
+ *    
  *    - A problem become apparent:
  *      - Nodes in t1 and t2's trees are now in 2 trees(their original trees and the merged result).
  *      - This sharing is a problem if we want to remove or otherwise alter subtrees

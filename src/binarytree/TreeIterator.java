@@ -27,7 +27,8 @@ import java.util.NoSuchElementException;
  *   also because seeing how a program is implemented nonrecursiively can sometimes 
  *   make the recursion clearer.
  *   
- *   
+ * = 3 iterator classes =
+ *
  * - We write 3 iterator classes, each in the spirit of the linked list.
  * - Each allows us to go to the first node, advance to the next node,
  *   test we have gone past the last node, and access the current node.
@@ -36,6 +37,7 @@ import java.util.NoSuchElementException;
  *   which is inherently nonrecursive and in fact uses a queue instead of
  *   a stack and is similar to the preorder traversal.
  *   
+ * = tree iteration class =
  *   
  *   - provides an abstract class for tree iteration.
  *   - Each iterator stores a reference to the tree root and an indication of the current node.
@@ -46,6 +48,7 @@ import java.util.NoSuchElementException;
  *   - They are protected to allow the derived class to access them.
  *   
  *   - Four method:
+ *   
  *     - The isValid and retrieve methods are invariant over the hierarchy,
  *       so an implementation is provided and they are declared final.  
  *       

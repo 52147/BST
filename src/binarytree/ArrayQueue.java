@@ -207,7 +207,7 @@ package binarytree;
 // void makeEmpty()   ----> Remove all items
 // Errors
 // getFront or dequeue on empty queue
-public class ArrayQueue<AnyType> {
+public class ArrayQueue<AnyType> implements Queue<AnyType>{
 	
 	private AnyType[] theArray;
 	private int currentSize;

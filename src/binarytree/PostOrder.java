@@ -165,97 +165,87 @@ import java.util.NoSuchElementException;
 // Construction: with tree to which iterator is bound
 //
 // Public Operations:
-// 1. boolean isValid()
-// 2. AnyType retrieve()
-// 3. void first()
-// 4. void advance()
+// 1. boolean isValid()   -----> True if at valid position in tree
+// 2. AnyType retrieve()  -----> Return item in current position
+// 3. void first()        -----> Set current position to first
+// 4. void advance()      -----> Advance(prefix)
 // Errors:
 // Exceptions thrown for illegal access or advance
-//
+
 class PostOrder<AnyType> extends TreeIterator<AnyType>
+
 {
-    /**
-     * Construct the iterator.
-     * The current position is set to null.
-     * @param theTree the tree to which the iterator is
-     *     permanently bound.
-     */
-    public PostOrder( BinaryTree<AnyType> theTree )
-    {
-        super( theTree );
-        s = new ArrayStack<StNode<AnyType>>( );
-        s.push( new StNode<AnyType>( t.getRoot( ) ) );
-    }
-
-    /**
-     * Set the current position to the first item, according
-     * to the postorder traversal scheme.
-     */
-    public void first( )
-    {
-        s.makeEmpty( );
-        if( t.getRoot( ) != null )
-        {
-            s.push( new StNode<AnyType>( t.getRoot( ) ) );
-            advance( );
-        }
-    }
-
-    /**
-     * Advance the current position to the next node in the tree,
-     *     according to the postorder traversal scheme.
-     * @throws NoSuchElementException if iteration has
-     *     been exhausted prior to the call.
-     */
-    public void advance( )
-    {
-        if( s.isEmpty( ) )
-        {
-            if( current == null )
-                throw new NoSuchElementException( "PostOrder Advance" );
-            current = null;
-            return;
-        }
-
-        StNode<AnyType> cnode;
-
-        for( ; ; )
-        {
-            cnode = s.topAndPop( );
-
-            if( ++cnode.timesPopped == 3 )
-            {
-                current = cnode.node;
-                return;
-            }
-
-            s.push( cnode );
-            if( cnode.timesPopped == 1 )
-            {
-                if( cnode.node.getLeft( ) != null )
-                    s.push( new StNode<AnyType>( cnode.node.getLeft( ) ) );
-            }
-            else  // cnode.timesPopped == 2
-            {
-                if( cnode.node.getRight( ) != null )
-                    s.push( new StNode<AnyType>( cnode.node.getRight( ) ) );
-            }
-        }
-    }
-
-      // An internal class for tree iterators
-    protected static class StNode<AnyType>
-    {
-        BinaryNode<AnyType> node;
-        int timesPopped;
-
-        StNode( BinaryNode<AnyType> n )
-        {
-           node = n;
-           timesPopped = 0;
-        }
-    }
+	/**An internal stack if visited nodes.*/
+	protected Stack<StNode<AnyType>> s; // The stack of StNode objects
+	
+	//An internal class for tree iterators
+	protected static class StNode<AnyType>{
+		BinaryNode<AnyType> node;
+		int timesPopped;
+		
+		StNode(BinaryNode<AnyType> n){
+			node = n;
+			timesPopped = 0;
+			
+		}
+	}
+	
+	
+	
+	/**
+	 * Construct the iterator.
+	 * The current position is set to null.
+	 * @param theTree the tree to which the iterator is permanently bound.
+	 */
+	public PostOrder(BinaryTree<AnyType> theTree) {
+		super(theTree);
+		s = new ArrayStack<StNode<AnyType>>();
+		s.push(new StNode<AnyType>(t.getRoot()));
+	}
+	
+	/**
+	 * Set the current position to the first item, according to the postorder traversal scheme.
+	 */
+	public void first() {
+		s.makeEmpty();
+		if(t.getRoot() != null) {
+			s.push(new StNode<AnyType>(t.getRoot()));
+			advance();
+		}
+	}
+	
+	/**
+	 * Advance the current position to the next node in the tree,
+	 * according to the postorder traversal scheme.
+	 * @throws NoSuchElementException if iteration has been exhausted prior to the call.
+	 */
+	public void advance() {
+		if(s.isEmpty()) {
+			if(current == null)
+				throw new NoSuchElementException("PostOrder Advance");
+			current = null;
+			return;
+			
+		}
+		StNode<AnyType> cnode;
+		
+		for(;;) {
+			cnode = s.topAndPop();
+			if(++cnode.timesPopped == 3) {
+				current = cnode.node;
+				return;
+			}
+			s.push(cnode);
+			
+			if(cnode.timesPopped == 1) {
+				if(cnode.node.getLeft() != null)
+					s.push(new StNode<AnyType>(cnode.node.getLeft()));
+			}else // cnode.timesPopped == 2
+			{
+			if(cnode.node.getRight() != null)
+				s.push(new StNode<AnyType>(cnode.node.getRight()));
+			}
+		}
+	}
     
-   /** An internal stack if visited nodes. */
-    protected Stack<StNode<AnyType>> s;    // The stack of StNode objects
 }
